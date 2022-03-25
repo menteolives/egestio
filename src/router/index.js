@@ -1,8 +1,8 @@
 import Vue from 'vue'
 //import VueRouter from 'vue-router'
 import VueRouter from 'vue-router'
-//import HomeView from '../views/HomeView.vue'
 import store from '@/store/store';
+import axios from "axios";
 
 Vue.use(VueRouter)
 
@@ -10,17 +10,81 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('../views/HomeView.vue')
+    component: () => import('../views/public/HomeView.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/public/LoginView.vue')
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: {
+      // eslint-disable-next-line
+      beforeRouteEnter(to,from,next) {
+       
+          console.log(from);
+          localStorage.clear();
+          store.state.session = null;
+          next('/');
+        
+      }
+    }
+  },
+  {
+    path: '/tokenlogin/:token',
+    name: 'tokenlogin',
+    component: {
+      // eslint-disable-next-line
+      beforeRouteEnter(to,from,next) {
+        //console.log(to);
+        var token = to.params.token;
+        //console.log(token);
+        const ENDPOINT_PATH =  process.env.VUE_APP_RUTA_API+"token/"+token;
+        //console.log(ENDPOINT_PATH);
+        axios.get(ENDPOINT_PATH).then((result) => {
+          //guarda los datos de sesión
+          //console.log(result)
+          if(result.data.status == "success" )
+          {
+              store.state.session = result.data.data;
+              localStorage.setItem('token',token);
+              //console.log(store.state.session);
+              next("main");
+          }
+          else {
+              //console.log("ir a login");
+              next("login");
+          }
+          
+         
+        })
+       
+      }
+    }
+    
   },
   {
     path: '/proposals',
     name: 'proposals',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ProposalsView.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProposalsView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/proposal/det/:id',
+    name: 'proposarldet',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProposalDetView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/MainView.vue'),
     meta: {
       requiresAuth: true
     }
@@ -31,7 +95,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/public/AboutView.vue')
   }
 ]
 

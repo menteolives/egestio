@@ -21,7 +21,7 @@ export default new Vuex.Store({
               'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        const ENDPOINT_PATH = "https://api.hormirapit.com/v2/user/"+context.state.user_token;
+        const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "token/"+context.state.user_token;
       
         const params = new URLSearchParams();
         //params.append('username', this.user);
