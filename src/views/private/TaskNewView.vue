@@ -1,12 +1,12 @@
 
 <template>
-  <div class="proposalnew">
+  <div class="tasknew">
       <navbar/>
       <div class="container">
-    <h1>Nueva propuesta</h1>
+    <h1>Nueva tarea</h1>
     <div class="mb-3">
   <label class="form-label">Título</label>
-  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la propuesta" v-model="title">
+  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="title">
 </div>
 <div class="mb-3">
   <label class="form-label">Descripción</label>
@@ -25,8 +25,7 @@ export default {
   data() {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
-      
-      type: "proposal",
+      type:"task",
       title: "",
       text: ""
     }
@@ -42,7 +41,7 @@ export default {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        var user_token = localStorage.getItem('token')
+       var user_token = localStorage.getItem('token')
       const ENDPOINT_PATH = this.apiServer+user_token+"/task";
      console.log(ENDPOINT_PATH);
       const params = new URLSearchParams();

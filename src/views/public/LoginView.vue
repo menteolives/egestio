@@ -49,9 +49,9 @@ export default {
         this.$store.state.session = result.data.data
         console.log(result.data.data);
         if(result.data) {
-          localStorage.setItem('token',result.data.token);
+          localStorage.setItem('token',result.data.data.token);
           
-          this.$router.push('welcome');
+          this.$router.push('tasks');
         }
         else {
           localStorage.removeItem('token');

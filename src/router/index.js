@@ -66,9 +66,41 @@ const routes = [
     
   },
   {
+    path: '/tasks',
+    name: 'tasks',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/TasksView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/task/new',
+    name: 'tasknew',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/TaskNewView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/task/det/:id',
+    name: 'taskdet',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/TaskDetView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/proposals',
     name: 'proposals',
     component: () => import(/* webpackChunkName: "about" */ '../views/private/ProposalsView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/proposal/new',
+    name: 'proposarldet',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProposalNewView.vue'),
     meta: {
       requiresAuth: true
     }
