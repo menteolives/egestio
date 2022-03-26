@@ -3,7 +3,7 @@
     <navbar/>
     <div class="container">
     <h1>Tareas</h1>
-    <router-link to="/task/new" tag="button" class='btn btn-primary'>Nueva tarea</router-link>
+    <router-link to="/task/edit" tag="button" class='btn btn-primary'>Nueva tarea</router-link>
     <div>
  
  <div>
@@ -58,9 +58,15 @@ export default {
   },
   mounted() {
       var user_token = localStorage.getItem('token')
-      const ENDPOINT_PATH = this.apiServer+user_token+"/tasks";
+      const ENDPOINT_PATH = this.apiServer+"tasks";
+      var AxiosOptions = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `${user_token}`
+            }
+        }
       axios
-      .get(ENDPOINT_PATH)
+      .get(ENDPOINT_PATH,AxiosOptions)
       .then((result) => {
           this.$store.state.tasks = result.data.tasks
           console.log(result.data.tasks)

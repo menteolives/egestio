@@ -74,9 +74,9 @@ const routes = [
     }
   },
   {
-    path: '/task/new',
-    name: 'tasknew',
-    component: () => import(/* webpackChunkName: "about" */ '../views/private/TaskNewView.vue'),
+    path: '/task/edit/:id?',
+    name: 'taskedit',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/TaskEditView.vue'),
     meta: {
       requiresAuth: true
     }
