@@ -1,18 +1,19 @@
 <template>
   <div class="login">
+    <div class="container">
     <h1>Acceso</h1>
     <form>
-    <p class="h4 text-center mb-4">Sign in</p>
+    <p class="h4 text-center mb-4">Entrar</p>
     <label for="defaultFormLoginEmailEx" class="grey-text">Usuario</label>
-    <input type="user" id="defaultFormLoginEmailEx" class="form-control" v-model="user"/>
+    <input type="user" id="defaultFormLoginEmailEx" class="form-control" v-model="user" placeholder="Usuario"/>
     <br/>
     <label for="defaultFormLoginPasswordEx" class="grey-text">Contraseña</label>
-    <input type="password" id="defaultFormLoginPasswordEx" class="form-control" v-model="pass"/>
+    <input type="password" id="defaultFormLoginPasswordEx" class="form-control" placeholder="Contraseña" v-model="pass"/>
     <div class="text-center mt-4">
-      <a class="btn btn-indigo" href='#' @click="login">Entrar</a>
+      <a class="btn btn-success btn-block" href='#' @click="login">Entrar</a>
     </div>
   </form>
-    
+    </div>
   </div>
 </template>
 <style scoped>

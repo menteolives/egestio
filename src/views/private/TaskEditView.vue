@@ -7,11 +7,13 @@
     <div class="mb-3">
   <label class="form-label">Título</label>
   <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task_title">
+  
 </div>
 <div class="row mb-3">
   <div class="col">
     <label class="form-label">Quien</label>
     <input type="text" class="form-control" maxlength="15" name="do_user" v-model="task_do_user">
+    
   </div>
   <div class="col">
     <label class="form-label">Cuando</label>
@@ -20,9 +22,9 @@
 </div>
 <div class="mb-3">
   <label class="form-label">Descripción</label>
-  <textarea class="form-control" name="text" rows="3" maxlength="1000" v-model="task_text"></textarea>
+  
+  <vue-editor v-model="task_text"></vue-editor>
 </div>
-
 
 <button class='btn btn-success btn-block' v-on:click="btnSaveClick">Guardar</button>
     </div>
@@ -30,6 +32,7 @@
 </template>
 <script>
 import Navbar from '@/components/_layout/NavbarPrivate';
+import { VueEditor } from "vue2-editor";
 import axios from "axios";
 
 export default {
@@ -50,7 +53,8 @@ export default {
     
   },
   components: {
-    Navbar
+    Navbar,
+    VueEditor
   },
   mounted() {
     console.log(this.$route)
