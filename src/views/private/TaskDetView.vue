@@ -2,14 +2,24 @@
   <div class="taskdet">
       <navbar/>
       <div class="container">
-    <h1>Detalles de la tarea</h1>
-    <router-link :to="'/task/edit/'+task.id" tag="button" class='btn btn-primary'>Editar</router-link>
+    
     <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div><b>{{task.title}}</b><br>
+        <small>
+          <span class="text-muted">Responsable</span> {{ task.do_user}} 
+          <span class="text-muted">Entrega</span> {{task.due_date}}
+          </small>
+        </div>
+        <router-link :to="'/task/edit/'+task.id" tag="button" class='btn btn-sm btn-primary'>
+          <i class='fa-solid fa-pen'></i>
+        </router-link>
+      </div>
         <div class="card-body">
-            {{task.title}}
-            <p>{{task.text}}</p>
+            
+            <div v-html="task.text"></div>
             <small class='text-muted'>{{task.created_user}} {{ task.created_date }}</small>
-            <p>{{task.due_date}} {{ task.do_user}}</p>
+            
         </div>
     </div>
     </div>

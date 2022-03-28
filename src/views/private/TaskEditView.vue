@@ -113,6 +113,8 @@ export default {
       console.log(this.editMode);
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         console.log(result);
+        
+        this.$router.push("/task/det/"+this.task_id);
       })
     }
   }
