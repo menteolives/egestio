@@ -22,17 +22,5 @@
     
     </template>
 <script>
-export default {
-  methods: {
-    visibleHandler(isVisible) {
-      if (isVisible) {
-        alert("x");
-        // Do something
-      } else {
-        alert("z")
-        // Do something else
-      }
-    }
-  }
-}
+
 </script>
