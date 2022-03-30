@@ -30,7 +30,20 @@
     </div>
 
     <div class="card mt-3">
+      <ul class="list-group list-group-flush">
+           <li v-for="comment in comments" v-bind:key="comment.comment_id" class="list-group-item d-flex">
+             <div>
+               <div class="border border-success rounded-circle mr-2 text-center align-middle text-success" style='font-weight:bold;width:50px;height:50px;line-height:35px;font-size:40px;border-width:4px !important;'><span>m</span></div>
+             </div>
+             <div>
+             <small><b>{{comment.created_user}}</b> {{comment.created_date}}</small> <br> 
+             {{comment.text}} 
+             </div>
+           </li>
+        </ul>
       <div class="card-body">
+         
+        
         <textarea maxlength="500" v-model="newTaskComment" class='border-0 w-100' placeholder="Comentar"></textarea>
         <button class='btn btn-sm btn-primary' v-on:click="btnComentSaveClick">Comentar</button>
       </div>
@@ -38,6 +51,19 @@
     </div>
   </div>
 </template>
+<style scoped>
+textarea {
+   border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none; /*remove the resize handle on the bottom right*/
+}
+</style>
 <script>
 import Navbar from '@/components/_layout/NavbarPrivate';
 import axios from "axios";
@@ -49,6 +75,7 @@ export default {
         apiServer: process.env.VUE_APP_RUTA_API,
           task_id: this.$route.params.id,
           task: [],
+          comments: [],
           newTaskComment: ""
       }
   },
@@ -58,6 +85,24 @@ export default {
   mounted() {
       this.task = this.$store.state.tasks[this.task_id];
       console.log(this.$store.state.tasks[this.task_id])
+
+
+      //carga los comentarios
+      var user_token = localStorage.getItem('token')
+      const ENDPOINT_PATH = this.apiServer+"task/comments/"+this.task_id;
+      var AxiosOptions = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `${user_token}`
+            }
+        }
+      axios
+      .get(ENDPOINT_PATH,AxiosOptions)
+      .then((result) => {
+          this.comments = result.data.comments
+          console.log(result);
+        //this.tasks = result.data.tasks;
+      })
   },
   methods: {
     btnComentSaveClick: function() {
