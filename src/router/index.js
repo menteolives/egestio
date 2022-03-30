@@ -66,6 +66,23 @@ const routes = [
     
   },
   {
+    path: '/projects',
+    name: 'projects',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProjectsView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+
+  {
+    path: '/project/edit/:id?',
+    name: 'project',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProjectEditView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/tasks',
     name: 'tasks',
     component: () => import(/* webpackChunkName: "about" */ '../views/private/TasksView.vue'),

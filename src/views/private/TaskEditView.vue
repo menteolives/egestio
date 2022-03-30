@@ -114,6 +114,7 @@ export default {
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         console.log(result);
         
+        
         this.$router.push("/task/det/"+this.task_id);
       })
     }

@@ -1,12 +1,14 @@
 <template>
   <div>
     <nav>
+      <b-button v-b-toggle.sidebar-1 variant="link"><i class='fa-solid fa-bars'></i></b-button>
       <router-link to="/proposals">Propuestas</router-link> | 
+      <router-link to="/projects">Proyectos</router-link> | 
       <router-link to="/tasks">Tareas</router-link> | 
       <router-link to="/logout">Salir</router-link> | 
       
     </nav>
-    <b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
+    
     <b-sidebar id="sidebar-1" v-b-visible.350="visibleHandler" title="Sidebar" shadow>
       <div class="px-3 py-2">
         <p>

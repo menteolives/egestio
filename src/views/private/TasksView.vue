@@ -2,38 +2,20 @@
   <div class="tasks">
     <navbar/>
     <div class="container">
-    <h1>Tareas</h1>
-    <router-link to="/task/edit" tag="button" class='btn btn-primary'>Nueva tarea</router-link>
+    <div class="d-flex justify-content-between">
+      <div></div>
+    <router-link to="/task/edit" tag="button" class='btn'><i class="fa-solid fa-plus"></i></router-link>
+    </div>
     <div>
  
  <div>
-  <b-tabs>
-    <b-tab active>
-      <template #title>
-        <i class='fa-solid fa-question'></i> En curso
-      </template>
-      <div class="list-group">
+    <div class="list-group">
   <router-link :to="'/task/det/'+task.id" v-for="task in tasks" v-bind:key="task.id" class="list-group-item list-group-item-action">
     {{ task.title }}
   </router-link>
   
 </div>
-    </b-tab>
-
-    <b-tab>
-      <template #title>
-        <i class='fa-solid fa-check text-success'></i> Finalizadas
-      </template>
-      <p class="p-3">Tab contents 2</p>
-    </b-tab>
-
-    <b-tab>
-      <template #title>
-        <i class='fa-solid fa-xmark text-danger'></i> Rechazado
-      </template>
-      <p class="p-3">Tab contents 3</p>
-    </b-tab>
-  </b-tabs>
+  
 </div>
 
 
