@@ -73,7 +73,14 @@ const routes = [
       requiresAuth: true
     }
   },
-
+  {
+    path: '/project/det/:id?',
+    name: 'project',
+    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProjectDetView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
   {
     path: '/project/edit/:id?',
     name: 'project',

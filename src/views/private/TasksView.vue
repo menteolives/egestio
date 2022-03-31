@@ -11,7 +11,9 @@
  <div>
     <div class="list-group">
   <router-link :to="'/task/det/'+task.id" v-for="task in tasks" v-bind:key="task.id" class="list-group-item list-group-item-action">
+    <div><small class='text-muted'><i :class="'fa-solid fa-'+task.project_icon"></i> {{task.project_name}}</small></div>
     {{ task.title }}
+    
   </router-link>
   
 </div>

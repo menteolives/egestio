@@ -3,11 +3,25 @@
   <div class="taskedit">
       <navbar/>
       <div class="container">
-    <h1>Nueva tarea</h1>
+    
     <div class="mb-3">
-  <label class="form-label">Título</label>
+  <label class="form-label">Tarea</label>
   <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task_title">
   
+</div>
+<div class="mb-3">
+  <label class="form-label">Proyecto</label>
+  {{ project_id }}
+  <b-form-select
+      v-model="project_id"
+      :options="projects"
+      class="mb-3"
+      value-field="id"
+      text-field="name"
+      disabled-field="notEnabled"
+    ></b-form-select>
+
+
 </div>
 <div class="row mb-3">
   <div class="col">
@@ -48,7 +62,9 @@ export default {
       task_text: "",
       task_type: "task",
       task_due_date: "",
-      task_do_user:""
+      task_do_user:"",
+      project_id: "",
+      projects: this.$store.state.projects
     }
     
   },
@@ -60,7 +76,7 @@ export default {
     console.log(this.$route)
     console.log(this.$route.params.id);
     if(this.$route.params.id == undefined) {
-      this.editMode = "insert"
+      this.editMode = "insert";
     }
     else {
       this.editMode = "update"
@@ -71,6 +87,7 @@ export default {
       this.task_type = this.task.type;
       this.task_due_date = this.task.due_date;
       this.task_do_user = this.task.do_user;
+      this.project_id = this.task.project_id;
     }
     console.log(this.editMode);
     console.log(this.task);
@@ -101,7 +118,8 @@ export default {
       params.append('task_text', this.task_text);
       params.append('task_due_date', this.task_due_date);
       params.append('task_do_user', this.task_do_user);
-      console.log(this.title);
+      params.append('project_id', this.project_id);
+      console.log(this.project_id);
       /*
       const params = {
         task_id: this.task_id,
