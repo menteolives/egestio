@@ -1,11 +1,11 @@
 <template>
   <div>
-    <nav>
+    <nav class='p-1'>
       <b-button v-b-toggle.sidebar-1 variant="link"><font-awesome-icon icon="bars" /> </b-button>
-      <router-link to="/proposals"><font-awesome-icon :icon="['far', 'hand-point-up']" /> Propuestas</router-link> | 
-      <router-link to="/projects">Proyectos</router-link> | 
-      <router-link to="/tasks">Tareas</router-link> | 
-      <router-link to="/logout">Salir</router-link> | 
+      <router-link to="/proposals"><font-awesome-icon :icon="['far', 'hand-point-up']" /> Propuestas</router-link> ·  
+      <router-link to="/projects">Proyectos</router-link> ·
+      <router-link to="/tasks">Tareas</router-link> ·
+      <router-link to="/logout">Salir</router-link>  
       
     </nav>
     

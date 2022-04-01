@@ -4,18 +4,18 @@
       <navbar/>
       <div class="container">
     
-    <div class="mb-3">
+    <div class="mb-1">
   <label class="form-label">Tarea</label>
   <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task_title">
   
 </div>
-<div class="mb-3">
+<div class="mb-1">
   <label class="form-label">Proyecto</label>
   {{ project_id }}
   <b-form-select
       v-model="project_id"
       :options="projects"
-      class="mb-3"
+      
       value-field="id"
       text-field="name"
       disabled-field="notEnabled"
@@ -23,21 +23,27 @@
 
 
 </div>
-<div class="row mb-3">
+<div class="row mb-1">
   <div class="col">
     <label class="form-label">Quien</label>
-    <input type="text" class="form-control" maxlength="15" name="do_user" v-model="task_do_user">
-    
+      <b-form-select
+      v-model="task_do_user"
+      :options="users"
+      
+      value-field="user_name"
+      text-field="user_name"
+      disabled-field="notEnabled"
+    ></b-form-select>
   </div>
   <div class="col">
     <label class="form-label">Cuando</label>
     <input type="date" class="form-control" name="due_date" v-model="task_due_date">
   </div>
 </div>
-<div class="mb-3">
+<div class="mb-1">
   <label class="form-label">Descripción</label>
   
-  <vue-editor v-model="task_text"></vue-editor>
+  <vue-editor v-model="task_text" :editor-toolbar="editorToolbar" ></vue-editor>
 </div>
 
 <button class='btn btn-success btn-block' v-on:click="btnSaveClick">Guardar</button>
@@ -54,6 +60,7 @@ export default {
   data() {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
+      users: this.$store.state.users,
       editMode: "",
       task: [],
       type:"task",
@@ -64,7 +71,11 @@ export default {
       task_due_date: "",
       task_do_user:"",
       project_id: "",
-      projects: this.$store.state.projects
+      projects: this.$store.state.projects,
+      editorToolbar: [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+    ]
     }
     
   },

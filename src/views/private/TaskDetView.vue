@@ -18,13 +18,25 @@
       </div>
         <div class="card-body">
             <div><h4>{{task.title}}</h4>
-        <small>
+            <div class='d-flex justify-content-between'>
+              <div>
+                <small>
           <span class="text-muted">Responsable</span> <b>{{ task.do_user}}</b> 
           <span class="text-muted"> Entrega</span> <b>{{task.due_date}}</b>
           </small>
+              </div>
+              <div>
+                <small class='text-muted'><font-awesome-icon :icon="task.project_icon"/> {{task.project_name}}</small>
+              </div>
+            </div>
+        
         </div>
             <div v-html="task.text"></div>
-            <small class='text-muted'>{{task.created_user}} {{ task.created_date }}</small>
+            <div class='d-flex justify-content-between'>
+              <div><small class='text-muted'>{{task.created_user}} {{ task.created_date }}</small></div>
+              
+            </div>
+            
             
         </div>
     </div>

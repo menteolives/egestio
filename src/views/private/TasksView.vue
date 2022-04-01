@@ -1,7 +1,7 @@
 <template>
   <div class="tasks">
     <navbar/>
-    <div class="container">
+    <div class="container p-0">
     <div class="d-flex justify-content-between">
       <div></div>
     <router-link to="/task/edit" tag="button" class='btn'><font-awesome-icon icon="plus" class='text-success' /></router-link>
@@ -10,10 +10,17 @@
  
  <div>
     <div class="list-group">
-  <router-link :to="'/task/det/'+task.id" v-for="task in tasks" v-bind:key="task.id" class="list-group-item list-group-item-action">
-    <div><small class='text-muted'><i :class="'fa-solid fa-'+task.project_icon"></i> {{task.project_name}}</small></div>
-    {{ task.title }}
+  <router-link :to="'/task/det/'+task.id" v-for="task in tasks" v-bind:key="task.id" class="list-group-item list-group-item-action p-1">
     
+    {{ task.title }}
+    <div class='d-flex justify-content-between'>
+      <div>
+        <small>{{task.do_user}} {{task.due_date}}</small>
+      </div>
+      <div>
+        <small class='text-muted'><font-awesome-icon :icon="task.project_icon"/> {{task.project_name}}</small>
+      </div>
+      </div>
   </router-link>
   
 </div>
@@ -41,6 +48,9 @@ export default {
     Navbar
   },
   mounted() {
+    var users = this.$store.dispatch("getUsers");
+    console.log(users);
+
       var user_token = localStorage.getItem('token')
       const ENDPOINT_PATH = this.apiServer+"tasks";
       var AxiosOptions = {

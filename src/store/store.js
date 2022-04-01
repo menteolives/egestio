@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     tasks: [],
+    projects: [],
     session: null
   },
   getters: {
@@ -14,6 +15,22 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
+    async getUsers() {
+      var user_token = localStorage.getItem('token')
+      const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "users";
+      var AxiosOptions = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `${user_token}`
+            }
+        }
+      axios
+      .get(ENDPOINT_PATH,AxiosOptions)
+      .then((result) => {
+          this.state.users = result.data.users
+          
+      })
+    },
     async checkToken(context) {
       try {
         console.log("API CONNECTION!!! intentando recuperar los datos de usuario según su token");
