@@ -4,7 +4,7 @@
     <div class="container">
     <div class="d-flex justify-content-between">
       <div></div>
-    <router-link to="/task/edit" tag="button" class='btn'><i class="fa-solid fa-plus"></i></router-link>
+    <router-link to="/task/edit" tag="button" class='btn'><font-awesome-icon icon="plus" class='text-success' /></router-link>
     </div>
     <div>
  

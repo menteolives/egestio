@@ -2,14 +2,16 @@
   <div class="projects">
     <navbar/>
     <div class="container">
-    <h1>Proyectos</h1>
-    <router-link to="/project/edit" tag="button" class='btn btn-primary'>Nuevo proyecto</router-link>
+    <div class="d-flex justify-content-between">
+      <div></div>
+    <router-link to="/project/edit" tag="button" class='btn'><font-awesome-icon icon="plus" class='text-success' /></router-link>
+    </div>
     <div>
  
  <div>
   <div class="list-group">
   <router-link :to="'/project/det/'+project.id" v-for="project in projects" v-bind:key="project.id" class="list-group-item list-group-item-action">
-    <i :class="'fa-solid fa-'+ project.icon"></i> {{ project.name }} <font-awesome-icon icon="trash" />
+    <font-awesome-icon :icon="project.icon" fixed-width /> {{ project.name }} 
   </router-link>
   
 </div>

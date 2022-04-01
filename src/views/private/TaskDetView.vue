@@ -7,12 +7,12 @@
       <div class="card-header d-flex justify-content-between align-items-center">
         <div>
           <router-link :to="'/tasks'" tag="button" class='btn btn-sm text-muted'>
-          <i class='fa-solid fa-arrow-left'></i>
+          <font-awesome-icon icon="arrow-left" class='text-primary' />
         </router-link>
         </div>
         <div>
         <router-link :to="'/task/edit/'+task.id" tag="button" class='btn btn-sm text-muted'>
-          <i class='fa-solid fa-pen'></i>
+          <font-awesome-icon icon="pen" class='text-primary' />
         </router-link>
         </div>
       </div>
