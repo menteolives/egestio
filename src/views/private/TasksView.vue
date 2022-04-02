@@ -7,7 +7,7 @@
     <router-link to="/task/edit" tag="button" class='btn'><font-awesome-icon icon="plus" class='text-success' /></router-link>
     </div>
     <div>
- 
+
  <div>
     <div class="list-group">
   <router-link :to="'/task/det/'+task.id" v-for="task in tasks" v-bind:key="task.id" class="list-group-item list-group-item-action p-1">
@@ -18,7 +18,7 @@
         <small>{{task.do_user}} {{task.due_date}}</small>
       </div>
       <div>
-        <small class='text-muted'><font-awesome-icon :icon="task.project_icon"/> {{task.project_name}}</small>
+        <small class='text-muted'><font-awesome-icon v-if="task.project_icon" :icon="task.project_icon"/> {{task.project_name}}</small>
       </div>
       </div>
   </router-link>
@@ -34,38 +34,32 @@
 
 <script>
 import Navbar from '@/components/_layout/NavbarPrivate';
-import axios from "axios";
 
 export default {
   name: 'TasksView',
   data() {
       return {
           apiServer: process.env.VUE_APP_RUTA_API,
-          tasks: []
+          
       }
   },
   components: {
     Navbar
   },
+  computed: {
+    users: function() {
+          return this.$store.state.users
+      },
+    tasks: function() {
+        return this.$store.state.tasks
+    }
+  },
+  created() {
+    this.$store.dispatch("loadUsers");
+    this.$store.dispatch("loadTasks")
+  },
   mounted() {
-    var users = this.$store.dispatch("getUsers");
-    console.log(users);
-
-      var user_token = localStorage.getItem('token')
-      const ENDPOINT_PATH = this.apiServer+"tasks";
-      var AxiosOptions = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `${user_token}`
-            }
-        }
-      axios
-      .get(ENDPOINT_PATH,AxiosOptions)
-      .then((result) => {
-          this.$store.state.tasks = result.data.tasks
-          console.log(result.data.tasks)
-        this.tasks = result.data.tasks;
-      })
+      
   }
 };
 </script>

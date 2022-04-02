@@ -24,7 +24,6 @@
 
 <script>
 import Navbar from '@/components/_layout/NavbarPrivate';
-import axios from "axios";
 
 export default {
   name: 'ProjectsView',
@@ -34,25 +33,19 @@ export default {
   data() {
       return {
           apiServer: process.env.VUE_APP_RUTA_API,
-          projects: []
+          
       }
   },
+  computed: {
+    projects: function() {
+          return this.$store.state.projects
+      },
+  },
+  created() {
+    this.$store.dispatch("loadProjects")
+  },
   mounted() {
-      var user_token = localStorage.getItem('token')
-      const ENDPOINT_PATH = this.apiServer+"projects";
-      var AxiosOptions = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `${user_token}`
-            }
-        }
-      axios
-      .get(ENDPOINT_PATH,AxiosOptions)
-      .then((result) => {
-          this.$store.state.projects = result.data.projects
-          console.log(result.data.projects)
-        this.projects = result.data.projects;
-      })
+      
   }
 };
 </script>

@@ -4,10 +4,10 @@ import router from './router'
 import store from './store/store'
 import { BootstrapVue } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrash,faComputer,faFutbol,faChampagneGlasses,faPlug,faTree,faPlus,faPen,faArrowLeft,faBars,faSailboat } from '@fortawesome/free-solid-svg-icons'
+import { faTrash,faComputer,faFutbol,faChampagneGlasses,faPlug,faTree,faPlus,faPen,faArrowLeft,faBars,faSailboat,faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { faHandPointUp } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faTrash,faComputer,faFutbol,faChampagneGlasses,faPlug,faTree,faPlus,faPen,faArrowLeft,faBars,faHandPointUp,faSailboat)
+library.add(faTrash,faComputer,faFutbol,faChampagneGlasses,faPlug,faTree,faPlus,faPen,faArrowLeft,faBars,faHandPointUp,faSailboat,faGlobe)
 //library.add(faTrash)
 
 import 'bootstrap/dist/css/bootstrap.css'

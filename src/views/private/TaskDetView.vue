@@ -1,10 +1,8 @@
 <template>
   <div class="taskdet">
       <navbar/>
-      <div class="container">
-    
-    <div class="card">
-      <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="container p-0">
+     <div class="d-flex justify-content-between align-items-center">
         <div>
           <router-link :to="'/tasks'" tag="button" class='btn btn-sm text-muted'>
           <font-awesome-icon icon="arrow-left" class='text-primary' />
@@ -16,6 +14,8 @@
         </router-link>
         </div>
       </div>
+    <div class="card">
+     
         <div class="card-body">
             <div><h4>{{task.title}}</h4>
             <div class='d-flex justify-content-between'>
@@ -85,36 +85,32 @@ export default {
   data() {
       return {
         apiServer: process.env.VUE_APP_RUTA_API,
-          task_id: this.$route.params.id,
+          //task_id: this.$route.params.id,
           task: [],
-          comments: [],
           newTaskComment: ""
       }
   },
   components: {
     Navbar
   },
+  computed: {
+     comments: function() {
+          return this.$store.state.task_comments
+      },
+  },
+  created() {
+    
+    this.task = this.$store.state.tasks[this.$route.params.id];
+    this.$store.dispatch("loadTaskComments",this.task.id)
+    console.log(this.comments)
+    //this.task = 
+  },
   mounted() {
-      this.task = this.$store.state.tasks[this.task_id];
-      console.log(this.$store.state.tasks[this.task_id])
+      //this.task = this.$store.state.tasks[this.task_id];
+      //console.log(this.$store.state.tasks[this.task_id])
 
 
-      //carga los comentarios
-      var user_token = localStorage.getItem('token')
-      const ENDPOINT_PATH = this.apiServer+"task/comments/"+this.task_id;
-      var AxiosOptions = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `${user_token}`
-            }
-        }
-      axios
-      .get(ENDPOINT_PATH,AxiosOptions)
-      .then((result) => {
-          this.comments = result.data.comments
-          console.log(result);
-        //this.tasks = result.data.tasks;
-      })
+      
   },
   methods: {
     btnComentSaveClick: function() {
@@ -130,7 +126,7 @@ export default {
       var ENDPOINT_PATH = this.apiServer+"comment";
       console.log(ENDPOINT_PATH);
       const params = new URLSearchParams();
-      params.append('task_id', this.task_id);
+      params.append('task_id', this.task.id);
       params.append('comment_text', this.newTaskComment);
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         console.log(result);

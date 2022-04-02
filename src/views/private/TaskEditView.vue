@@ -60,7 +60,6 @@ export default {
   data() {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
-      users: this.$store.state.users,
       editMode: "",
       task: [],
       type:"task",
@@ -79,9 +78,20 @@ export default {
     }
     
   },
+  computed: {
+    users () {
+          return this.$store.getters.users
+      }
+  },
   components: {
     Navbar,
     VueEditor
+  },
+  created() {
+    //comprueba que tengamos los datos necesarios
+    if(this.$store.state.projects.length === 0 ) {
+      this.$store.dispatch("loadProjects")
+    }
   },
   mounted() {
     console.log(this.$route)
