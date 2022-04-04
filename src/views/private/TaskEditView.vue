@@ -6,14 +6,14 @@
     
     <div class="mb-1">
   <label class="form-label">Tarea</label>
-  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task_title">
+  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task.title">
   
 </div>
 <div class="mb-1">
   <label class="form-label">Proyecto</label>
-  {{ project_id }}
+  {{ task.project_id }}
   <b-form-select
-      v-model="project_id"
+      v-model="task.project_id"
       :options="projects"
       
       value-field="id"
@@ -27,7 +27,7 @@
   <div class="col">
     <label class="form-label">Quien</label>
       <b-form-select
-      v-model="task_do_user"
+      v-model="task.do_user"
       :options="users"
       
       value-field="user_name"
@@ -37,13 +37,13 @@
   </div>
   <div class="col">
     <label class="form-label">Cuando</label>
-    <input type="date" class="form-control" name="due_date" v-model="task_due_date">
+    <input type="date" class="form-control" name="due_date" v-model="task.due_date">
   </div>
 </div>
 <div class="mb-1">
   <label class="form-label">Descripción</label>
   
-  <vue-editor v-model="task_text" :editor-toolbar="editorToolbar" ></vue-editor>
+  <vue-editor v-model="task.text" :editor-toolbar="editorToolbar" ></vue-editor>
 </div>
 
 <button class='btn btn-success btn-block' v-on:click="btnSaveClick">Guardar</button>
@@ -61,15 +61,25 @@ export default {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
       editMode: "",
-      task: [],
-      type:"task",
-      task_id: 0,
-      task_title: "",
-      task_text: "",
-      task_type: "task",
-      task_due_date: "",
-      task_do_user:"",
-      project_id: "",
+      task: {
+        "id":"0",
+        "title":"x",
+        "text":"x",
+        "due_date":"",
+        "do_user":"",
+        "project_id":"",
+        "type":"task"
+
+
+      },
+      //type:"task",
+      //task_id: 0,
+      //task_title: "",
+      //task_text: "",
+      //task_type: "task",
+      //task_due_date: "",
+      //task_do_user:"",
+      //project_id: "",
       projects: this.$store.state.projects,
       editorToolbar: [
       ["bold", "italic", "underline"],
@@ -98,17 +108,18 @@ export default {
     console.log(this.$route.params.id);
     if(this.$route.params.id == undefined) {
       this.editMode = "insert";
+      
     }
     else {
       this.editMode = "update"
-      this.task_id = this.$route.params.id
-      this.task = this.$store.state.tasks[this.task_id];
-      this.task_title = this.task.title;
-      this.task_text = this.task.text;
-      this.task_type = this.task.type;
-      this.task_due_date = this.task.due_date;
-      this.task_do_user = this.task.do_user;
-      this.project_id = this.task.project_id;
+      //this.task_id = this.$route.params.id
+      this.task = this.$store.state.tasks[this.$route.params.id];
+      //this.task.title = this.task.title;
+      //this.task.text = this.task.text;
+      //this.task.type = this.task.type;
+      //this.task.due_date = this.task.due_date;
+      //this.task.do_user = this.task.do_user;
+      //this.task.project_id = this.task.project_id;
     }
     console.log(this.editMode);
     console.log(this.task);
@@ -132,15 +143,15 @@ export default {
       
      console.log(ENDPOINT_PATH);
       const params = new URLSearchParams();
-      params.append('task_id', this.task_id);
+      params.append('task_id', this.task.id);
       params.append('edit_mode', this.editMode);
-      params.append('task_type', this.task_type);
-      params.append('task_title', this.task_title);
-      params.append('task_text', this.task_text);
-      params.append('task_due_date', this.task_due_date);
-      params.append('task_do_user', this.task_do_user);
-      params.append('project_id', this.project_id);
-      console.log(this.project_id);
+      params.append('task_type', this.task.type);
+      params.append('task_title', this.task.title);
+      params.append('task_text', this.task.text);
+      params.append('task_due_date', this.task.due_date);
+      params.append('task_do_user', this.task.do_user);
+      params.append('project_id', this.task.project_id);
+      console.log(this.task.project_id);
       /*
       const params = {
         task_id: this.task_id,
@@ -152,9 +163,18 @@ export default {
       console.log(this.editMode);
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         console.log(result);
+        if(this.editMode == "insert") {
+          this.task.id = result.data.id;
+          var key = this.task.id;
+          var new_task = {};
+          new_task[key] = this.task;
+          this.$store.commit('addNewTask', new_task)
+          //this.$store.state.tasks.push(new_task);
+          console.log(result);
+        }
         
         
-        this.$router.push("/task/det/"+this.task_id);
+        this.$router.push("/task/det/"+this.task.id);
       })
     }
   }

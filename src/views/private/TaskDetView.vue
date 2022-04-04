@@ -21,12 +21,14 @@
             <div class='d-flex justify-content-between'>
               <div>
                 <small>
-          <span class="text-muted">Responsable</span> <b>{{ task.do_user}}</b> 
-          <span class="text-muted"> Entrega</span> <b>{{task.due_date}}</b>
+          <font-awesome-icon icon="user" class='text-muted'/> <b>{{ task.do_user}}</b>  
+          <font-awesome-icon icon="calendar-check" class='ml-2 text-muted'/> <b>{{task.due_date}}</b>
           </small>
               </div>
               <div>
+                <router-link :to="'/project/det/'+task.project_id">
                 <small class='text-muted'><font-awesome-icon :icon="task.project_icon"/> {{task.project_name}}</small>
+                </router-link>
               </div>
             </div>
         

@@ -27,6 +27,9 @@ export default new Vuex.Store({
     },
     SET_PROJECTS(state,projects) {
       state.projects = projects
+    },
+    addNewTask(state,task) {
+      state.tasks.push(task)
     }
   },
   actions: {
