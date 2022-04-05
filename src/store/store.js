@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     tasks: [],
+    task: [],
     projects: [],
     users: [],
     task_comments: [],
@@ -22,17 +23,18 @@ export default new Vuex.Store({
     SET_TASKS(state,tasks) {
       state.tasks = tasks
     },
+    SET_TASK(state,task) {
+      state.task = task
+    },
     SET_TASK_COMMENTS(state,comments) {
       state.task_comments = comments
     },
     SET_PROJECTS(state,projects) {
       state.projects = projects
-    },
-    addNewTask(state,task) {
-      state.tasks.push(task)
     }
   },
   actions: {
+    
     async loadUsers({ commit }) {
       var user_token = localStorage.getItem('token')
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "users";
@@ -48,6 +50,24 @@ export default new Vuex.Store({
           commit('SET_USERS',result.data.users);
           //this.state.users = result.data.users
           
+          
+      })
+    },
+    async loadTask({commit},task_id) {
+      console.log("loadtask",task_id);
+      var user_token = localStorage.getItem('token')
+      const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API+"task/"+task_id;
+      var AxiosOptions = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `${user_token}`
+            }
+        }
+      axios
+      .get(ENDPOINT_PATH,AxiosOptions)
+      .then((result) => {
+          commit('SET_TASK',result.data.task);
+          console.log(result.data.task);
           
       })
     },
@@ -123,8 +143,8 @@ export default new Vuex.Store({
         //params.append('password', this.pass);
         axios.get(ENDPOINT_PATH , params, optionAxios).then((result) => {
           //guarda los datos de sesión
-          this.state.session = result.data
-          console.log("RESPUESTA API, el usuario puede seguir según su token", result.data);
+          this.state.session = result.data.session
+          console.log("RESPUESTA API, el usuario puede seguir según su token", result.data.session);
           //guarde en local storage el token para recordar próximas entradas
           //localStorage.setItem('token',result.data.token);
           //this.$router.push('day');

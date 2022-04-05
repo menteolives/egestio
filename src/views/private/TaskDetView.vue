@@ -87,8 +87,8 @@ export default {
   data() {
       return {
         apiServer: process.env.VUE_APP_RUTA_API,
-          //task_id: this.$route.params.id,
-          task: [],
+          task_id: this.$route.params.id,
+          
           newTaskComment: ""
       }
   },
@@ -96,13 +96,17 @@ export default {
     Navbar
   },
   computed: {
+     task: function() {
+        return this.$store.state.task
+    },
      comments: function() {
           return this.$store.state.task_comments
       },
   },
   created() {
-    
-    this.task = this.$store.state.tasks[this.$route.params.id];
+    this.$store.dispatch("loadTask",this.task_id);
+    console.log(this.task_id);
+    //this.task = this.$store.state.tasks[this.$route.params.id];
     this.$store.dispatch("loadTaskComments",this.task.id)
     console.log(this.comments)
     //this.task = 

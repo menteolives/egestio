@@ -47,10 +47,10 @@ export default {
       params.append('password', this.pass);
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         //guarda los datos de sesión
-        this.$store.state.session = result.data.data
+        this.$store.state.session = result.data.user
         console.log(result.data.data);
         if(result.data) {
-          localStorage.setItem('token',result.data.data.token);
+          localStorage.setItem('token',result.data.user.token);
           
           this.$router.push('tasks');
         }

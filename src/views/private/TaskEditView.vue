@@ -6,7 +6,7 @@
     
     <div class="mb-1">
   <label class="form-label">Tarea</label>
-  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task.title">
+  <input type="text" ref="task_title" class="form-control" name="title" maxlength="150" placeholder="Título de la tarea" v-model="task.title">
   
 </div>
 <div class="mb-1">
@@ -68,7 +68,8 @@ export default {
         "due_date":"",
         "do_user":"",
         "project_id":"",
-        "type":"task"
+        "type":"task",
+        "project_icon": ""
 
 
       },
@@ -104,22 +105,22 @@ export default {
     }
   },
   mounted() {
+    this.$refs.task_title.focus()
     console.log(this.$route)
     console.log(this.$route.params.id);
     if(this.$route.params.id == undefined) {
       this.editMode = "insert";
+      console.log(this.$store.state.session);
+      this.task.do_user = this.$store.state.session.user_name
+      this.task.project_id = 1;
+      this.task.project_icon = "globe"
+      this.task.project_name = "General"
       
     }
     else {
       this.editMode = "update"
-      //this.task_id = this.$route.params.id
       this.task = this.$store.state.tasks[this.$route.params.id];
-      //this.task.title = this.task.title;
-      //this.task.text = this.task.text;
-      //this.task.type = this.task.type;
-      //this.task.due_date = this.task.due_date;
-      //this.task.do_user = this.task.do_user;
-      //this.task.project_id = this.task.project_id;
+      
     }
     console.log(this.editMode);
     console.log(this.task);
@@ -164,11 +165,9 @@ export default {
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         console.log(result);
         if(this.editMode == "insert") {
-          this.task.id = result.data.id;
-          var key = this.task.id;
-          var new_task = {};
-          new_task[key] = this.task;
-          this.$store.commit('addNewTask', new_task)
+          this.task.id = result.data.task_id;
+          
+          
           //this.$store.state.tasks.push(new_task);
           console.log(result);
         }
