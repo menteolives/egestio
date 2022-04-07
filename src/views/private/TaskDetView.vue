@@ -76,42 +76,7 @@
 
       <div class="card mt-3">
         <ul class="list-group list-group-flush">
-          <li
-            v-for="comment in comments"
-            v-bind:key="comment.comment_id"
-            class="list-group-item d-flex"
-          >
-            <div>
-              <div
-                class="
-                  border border-success
-                  rounded-circle
-                  mr-2
-                  text-center
-                  align-middle
-                  text-success
-                "
-                style="
-                  font-weight: bold;
-                  width: 50px;
-                  height: 50px;
-                  line-height: 35px;
-                  font-size: 40px;
-                  border-width: 4px !important;
-                "
-              >
-                <span>m</span>
-              </div>
-            </div>
-            <div>
-              <small
-                ><b>{{ comment.created_user }}</b>
-                {{ comment.created_date }}</small
-              >
-              <br />
-              {{ comment.text }}
-            </div>
-          </li>
+          <TaskComment v-for="comment in comments" v-bind:key="comment.comment_id" :comment="comment" />
         </ul>
         <div class="card-body">
           <textarea
@@ -146,6 +111,7 @@ textarea {
 </style>
 <script>
 import Navbar from "@/components/_layout/NavbarPrivate";
+import TaskComment from "@/components/TaskComment";
 import axios from "axios";
 
 export default {
@@ -153,12 +119,12 @@ export default {
   data() {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
-
       newTaskComment: "",
     };
   },
   components: {
     Navbar,
+    TaskComment
   },
   computed: {
     task: function () {

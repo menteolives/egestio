@@ -10,8 +10,10 @@
  
  <div>
   <div class="list-group">
-  <router-link :to="'/project/det/'+project.id" v-for="project in projects" v-bind:key="project.id" class="list-group-item list-group-item-action">
-    <font-awesome-icon :icon="project.icon" fixed-width /> {{ project.name }} 
+  <router-link :to="'/project/det/'+project.id" v-for="project in projects" v-bind:key="project.id" 
+  class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <span><font-awesome-icon :icon="project.icon" fixed-width /> {{ project.name }}</span> 
+    <span class="badge badge-secondary badge-pill">{{project.tasks_num}}</span>
   </router-link>
   
 </div>
