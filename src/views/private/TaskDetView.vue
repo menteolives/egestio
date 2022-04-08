@@ -40,6 +40,7 @@
       <div class="card">
         <div class="card-body">
           <div>
+            <span v-for="tag in task.tags" v-bind:key="tag">{{tag}}</span>
             <h4>{{ task.title }}</h4>
             <div class="d-flex justify-content-between">
               <div>

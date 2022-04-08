@@ -17,7 +17,7 @@
       <div class="mb-1">
         <b-form-tags
       input-id="tags-separators"
-      v-model="tags"
+      v-model="task.tags"
       separator=" ,;"
       placeholder="Añade una etiqueta"
       tag-variant = "light"
@@ -88,7 +88,6 @@ export default {
         ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
       ],
-      tags: ["#esgrau","@ajuntament"]
     };
   },
   computed: {
@@ -153,6 +152,7 @@ export default {
       params.append("task_due_date", this.task.due_date);
       params.append("task_do_user", this.task.do_user);
       params.append("project_id", this.task.project_id);
+      params.append("tags", this.task.tags.join(','));
       console.log(this.task.project_id);
 
       console.log(this.editMode);

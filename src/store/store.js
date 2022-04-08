@@ -29,7 +29,8 @@ export default new Vuex.Store({
         "project_name": "General",
         "title": "",
         "type": "task",
-        "due_date": moment().format('YYYY-MM-DD')
+        "due_date": moment().format('YYYY-MM-DD'),
+        "tags": []
       }
       state.task = task;
 
