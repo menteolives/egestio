@@ -15,6 +15,17 @@
         />
       </div>
       <div class="mb-1">
+        <b-form-tags
+      input-id="tags-separators"
+      v-model="tags"
+      separator=" ,;"
+      placeholder="Añade una etiqueta"
+      tag-variant = "light"
+      remove-on-delete
+      no-add-on-enter
+    ></b-form-tags>
+      </div>
+      <div class="mb-1">
         <label class="form-label">Proyecto</label>
         {{ task.project_id }}
         <b-form-select
@@ -77,6 +88,7 @@ export default {
         ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
       ],
+      tags: ["#esgrau","@ajuntament"]
     };
   },
   computed: {
@@ -88,6 +100,7 @@ export default {
     },
   },
   components: {
+    
     Navbar,
     VueEditor,
   },
