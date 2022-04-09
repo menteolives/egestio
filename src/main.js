@@ -23,15 +23,20 @@ import {
   faGlobe,
   faUser,
   faCalendarCheck,
-  faCheck
+  faCheck,
+  faShareNodes,
+  faCopy
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faHandPointUp
 } from '@fortawesome/free-regular-svg-icons'
 import {
+  faWhatsapp
+} from '@fortawesome/free-brands-svg-icons'
+import {
   FontAwesomeIcon
 } from '@fortawesome/vue-fontawesome'
-library.add(faTrash, faComputer, faFutbol, faChampagneGlasses, faPlug, faTree, faPlus, faPen, faArrowLeft, faBars, faHandPointUp, faSailboat, faGlobe, faUser, faCalendarCheck, faCheck)
+library.add(faTrash, faComputer, faFutbol, faChampagneGlasses, faPlug, faTree, faPlus, faPen, faArrowLeft, faBars, faHandPointUp, faSailboat, faGlobe, faUser, faCalendarCheck, faCheck, faShareNodes, faWhatsapp, faCopy)
 //library.add(faTrash)
 
 import 'bootstrap/dist/css/bootstrap.css'

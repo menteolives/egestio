@@ -1,5 +1,23 @@
 <template>
   <div class="taskdet">
+    <div>
+
+  <b-modal id="modal-1" ok-only ok-title="Cerrar" title="Compartir tarea">
+    <b>{{task.title}}</b>
+    <p class="my-4">
+      
+      <input 
+        class="form-control mb-3"
+           v-on:focus="$event.target.select()" 
+           ref="txtPublicLink" 
+           readonly 
+           :value="public_link"/>
+      <a class='btn btn-success mr-1' :href="'whatsapp://send?text='+whatsapp_link"><font-awesome-icon :icon="['fab', 'whatsapp']" /></a>
+       <button class="btn btn-primary" v-on:click="btnCopyLink"><font-awesome-icon icon="copy" /></button>
+    </p>
+  </b-modal>
+
+</div>
     <navbar />
     <div class="container p-0">
       <div class="d-flex justify-content-between align-items-center">
@@ -12,7 +30,10 @@
             <font-awesome-icon icon="arrow-left" class="text-primary" />
           </router-link>
         </div>
+        
         <div>
+          <b-button variant="btn-link" v-b-modal.modal-1><font-awesome-icon icon="share-nodes" /></b-button>
+         
           <router-link
             :to="'/task/edit/' + task.id"
             tag="button"
@@ -134,6 +155,12 @@ export default {
     comments: function () {
       return this.$store.state.task_comments;
     },
+    public_link: function () {
+      return window.location.origin+'/egestio/#/public/task/'+this.task.public_token;
+    }, 
+    whatsapp_link: function() {
+      return encodeURIComponent(window.location.origin+'/egestio/#/public/task/'+this.task.public_token);
+    }
   },
   created() {
     this.$store.dispatch("loadTask", this.$route.params.id);
@@ -141,6 +168,13 @@ export default {
   },
   mounted() {},
   methods: {
+    btnCopyLink: function() {
+      console.log("x");
+      this.$refs.txtPublicLink.focus();
+      document.execCommand('copy');
+      //navigator.clipboard.writeText();
+      alert("Enlace copiado al portapapeles");
+    },
     btnTaskCloseClick: function () {
       var user_token = localStorage.getItem("token");
       var optionAxios = {

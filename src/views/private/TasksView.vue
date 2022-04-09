@@ -12,7 +12,7 @@
         <div>
           <div class="list-group">
             <router-link
-              :to="'/task/det/' + task.id"
+              :to="'/task/' + task.id"
               v-for="task in tasks"
               v-bind:key="task.id"
               class="list-group-item list-group-item-action p-1"

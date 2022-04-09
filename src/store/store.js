@@ -154,6 +154,7 @@ export default new Vuex.Store({
           //this.projects = result.data.projects;
         })
     },
+    // eslint-disable-next-line
     async checkToken(context) {
       try {
         console.log("API CONNECTION!!! intentando recuperar los datos de usuario según su token");
@@ -175,6 +176,8 @@ export default new Vuex.Store({
           //guarde en local storage el token para recordar próximas entradas
           //localStorage.setItem('token',result.data.token);
           //this.$router.push('day');
+          
+          //if (destination) this.$router.push(destination);
 
 
 

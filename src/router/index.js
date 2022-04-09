@@ -97,6 +97,7 @@ const routes = [
       requiresAuth: true
     }
   },
+  
   {
     path: '/task/edit/:id?',
     name: 'taskedit',
@@ -106,12 +107,17 @@ const routes = [
     }
   },
   {
-    path: '/task/det/:id',
+    path: '/task/:id',
     name: 'taskdet',
     component: () => import(/* webpackChunkName: "about" */ '../views/private/TaskDetView.vue'),
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/public/task/:token?',
+    name: 'tasks',
+    component: () => import( /* webpackChunkName: "about" */ '../views/public/TaskPublicView.vue'),
   },
   {
     path: '/proposals',
