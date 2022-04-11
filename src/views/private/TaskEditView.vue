@@ -163,7 +163,9 @@ export default {
           //this.$store.state.tasks.push(new_task);
           console.log(result);
         }
-        this.$router.push("/task/det/" + this.task.id);
+        this.$router.push("/task/" + this.task.id);
+      }).catch(function(error) {
+        console.log(error);
       });
     },
   },
