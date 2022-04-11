@@ -40,11 +40,12 @@ export default {
   },
   computed: {
     projects: function() {
+      console.log(this.$store.state.projects)
           return this.$store.state.projects
       },
   },
   created() {
-    this.$store.dispatch("loadProjects")
+    //this.$store.dispatch("loadProjects")
   },
   mounted() {
       

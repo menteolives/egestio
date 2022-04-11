@@ -92,7 +92,8 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.getters.users;
+      console.log(this.$store.state.users);
+      return this.$store.state.users;
     },
     task() {
       return this.$store.state.task;
@@ -107,10 +108,11 @@ export default {
     //comprueba que tengamos los datos necesarios
     if (this.$store.state.projects.length === 0) {
       this.$store.dispatch("loadProjects");
+      console.log(this.$store.state.projects)
     }
     if (this.$route.params.id == undefined) {
       this.editMode = "insert";
-      console.log(this.$store.state.session);
+      
       this.$store.dispatch("newTask");
     } else {
       this.editMode = "update";
@@ -123,7 +125,7 @@ export default {
     this.$refs.task_title.focus();
     console.log(this.$route);
     console.log(this.$route.params.id);
-
+    console.log(this.$store.state.session);
     //console.log(this.$router.params.id == undefined);
     /*if(this.$router.params.id)
     console.log(this.$router.params.id);
