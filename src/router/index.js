@@ -172,7 +172,7 @@ router.beforeEach((to, from, next) => {
   
   
   if(to.matched.some(record=>record.meta.requiresAuth)) {
-    if(store.state.session) {
+    if(localStorage.getItem('token')) {
       //tiene acceso console.log("tiene acceso");
       console.log("Existe sesión, puede continuar", store.state.session.token);
       next();

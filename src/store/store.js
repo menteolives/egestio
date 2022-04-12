@@ -48,7 +48,7 @@ export default new Vuex.Store({
   actions: {
 
     async loadUsers() {
-      var user_token = this.state.session.token;
+      var user_token = localStorage.getItem('token');
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "users";
       var AxiosOptions = {
         headers: {
@@ -72,7 +72,7 @@ export default new Vuex.Store({
       commit
     }, task_id) {
       console.log("loadtask", task_id);
-      var user_token = this.state.session.token;
+      var user_token = localStorage.getItem('token');
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "task/" + task_id;
       var AxiosOptions = {
         headers: {
@@ -91,7 +91,7 @@ export default new Vuex.Store({
     async loadTasks({
       commit
     }) {
-     var user_token = this.state.session.token;
+     var user_token = localStorage.getItem('token');
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "tasks";
       var AxiosOptions = {
         headers: {
@@ -112,7 +112,7 @@ export default new Vuex.Store({
     }, task_id) {
       //carga los comentarios
 
-      var user_token = this.state.session.token;
+      var user_token = localStorage.getItem('token');
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "task/comments/" + task_id;
       var AxiosOptions = {
         headers: {
@@ -131,7 +131,7 @@ export default new Vuex.Store({
         })
     },
     async loadProjects() {
-      var user_token = this.state.session.token;
+      var user_token = localStorage.getItem('token');
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "projects";
       var AxiosOptions = {
         headers: {
@@ -152,14 +152,15 @@ export default new Vuex.Store({
     // eslint-disable-next-line
     async checkToken(context) {
       try {
+        var user_token =localStorage.getItem('token')
         console.log("API CONNECTION!!! intentando recuperar los datos de usuario según su token");
-        console.log("Api, comprueba este token ->", context.state.session.token);
+        console.log("Api, comprueba este token ->", user_token);
         var optionAxios = {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "token/" + context.state.session.token;
+        const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "token/" + user_token;
 
         const params = new URLSearchParams();
         //params.append('username', this.user);
@@ -167,7 +168,8 @@ export default new Vuex.Store({
         axios.get(ENDPOINT_PATH, params, optionAxios).then((result) => {
           //guarda los datos de sesión
           //this.state.session = result.data.session
-          console.log("RESPUESTA API, el usuario puede seguir según su token", result.data.session.token);
+          console.log("RESPUESTA API, el usuario puede seguir según su token", user_token);
+          console.log(result);
           //guarde en local storage el token para recordar próximas entradas
           //localStorage.setItem('token',result.data.token);
           //this.$router.push('day');
