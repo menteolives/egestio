@@ -1,7 +1,7 @@
 <template>
   <div class="project">
     <navbar/>
-    <div class="container">
+    <div class="container p-1">
     <h5><font-awesome-icon v-if="project.icon" :icon="project.icon"/> {{ project.name }}</h5>
      <div class="list-group">
   <router-link :to="'/task/det/'+task.id" v-for="task in project_tasks" v-bind:key="task.id" class="list-group-item list-group-item-action p-1">

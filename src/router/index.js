@@ -90,7 +90,7 @@ const routes = [
     }
   },
   {
-    path: '/tasks',
+    path: '/tasks/:user?',
     name: 'tasks',
     component: () => import(/* webpackChunkName: "about" */ '../views/private/TasksView.vue'),
     meta: {
@@ -174,7 +174,7 @@ router.beforeEach((to, from, next) => {
   if(to.matched.some(record=>record.meta.requiresAuth)) {
     if(localStorage.getItem('token')) {
       //tiene acceso console.log("tiene acceso");
-      console.log("Existe sesión, puede continuar", store.state.session.token);
+      console.log("Existe sesión, puede continuar", localStorage.getItem('token'));
       next();
     } else {
       console.log("Datos de sesión inexistentes, intenta reactivar via token");

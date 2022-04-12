@@ -1,7 +1,7 @@
 <template>
   <div class="projects">
     <navbar/>
-    <div class="container p-0">
+    <div class="container p-1">
     <div class="d-flex justify-content-between">
       <div></div>
     <router-link to="/project/edit" tag="button" class='btn'><font-awesome-icon icon="plus" class='text-success' /></router-link>

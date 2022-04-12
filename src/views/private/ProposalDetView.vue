@@ -2,7 +2,7 @@
 <template>
   <div class="proposalnew">
       <navbar/>
-      <div class="container">
+      <div class="container p-1">
     <h1>Detalles de la propuesta</h1>
     <div class="card">
         <div class="card-body">

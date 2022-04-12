@@ -1,7 +1,10 @@
 <template>
   <div class="taskedit">
     <navbar />
-    <div class="container">
+    <div class="container p-1">
+      <div class="card">
+        <div class="card-body p-2">
+      
       <div class="mb-1">
         <label class="form-label">Tarea</label>
         <input
@@ -69,6 +72,8 @@
       <button class="btn btn-success btn-block" v-on:click="btnSaveClick">
         Guardar
       </button>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -85,9 +90,12 @@ export default {
       editMode: "",
       projects: this.$store.state.projects,
       editorToolbar: [
-        ["bold", "italic", "underline"],
+        ["bold", "italic", "underline","link"],
+        
         [{ list: "ordered" }, { list: "bullet" }],
-      ],
+        [{ color: [] }],
+        
+      ]
     };
   },
   computed: {

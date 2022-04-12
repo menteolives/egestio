@@ -6,7 +6,6 @@
       <router-link to="/projects">Proyectos</router-link> ·
       <router-link to="/tasks">Tareas</router-link> ·
       <router-link to="/logout">Salir</router-link>  
-      
     </nav>
     
     <b-sidebar id="sidebar-1" v-b-visible.350="visibleHandler" title="Sidebar" shadow>

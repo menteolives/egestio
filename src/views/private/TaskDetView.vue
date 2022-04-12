@@ -19,7 +19,7 @@
 
 </div>
     <navbar />
-    <div class="container p-0">
+    <div class="container p-1">
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <router-link
@@ -55,7 +55,7 @@
           >
             Reabrir
           </button>
-          {{ task.status }}
+          
         </div>
       </div>
       <div class="card">
@@ -96,7 +96,7 @@
         </div>
       </div>
 
-      <div class="card mt-3">
+      <div class="card mt-1">
         <ul class="list-group list-group-flush">
           <TaskComment v-for="comment in comments" v-bind:key="comment.comment_id" :comment="comment" />
         </ul>
