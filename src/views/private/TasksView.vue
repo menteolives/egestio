@@ -4,7 +4,7 @@
     <div class="container p-1">
       <div class="d-flex justify-content-between">
         <div>
-          <router-link :to="'/tasks/'+user_name">Mis tareas</router-link>
+          <router-link :to="'/tasks/'+session.user_name">Mis tareas</router-link>
           </div>
           <div>
         <router-link to="/task/edit" tag="button" class="btn"
@@ -52,8 +52,8 @@ export default {
   name: "TasksView",
   data() {
     return {
-      apiServer: process.env.VUE_APP_RUTA_API,
-      user_name: this.$store.state.session.user_name
+      apiServer: process.env.VUE_APP_RUTA_API
+      
     };
   },
   components: {
@@ -62,6 +62,9 @@ export default {
   computed: {
     users: function () {
       return this.$store.state.users;
+    },
+    session: function() {
+      return this.$store.state.session;
     },
     tasks_sorted: function(orderby="due_date") {
       var tasks = Object.values(this.tasks);

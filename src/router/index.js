@@ -126,6 +126,13 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  }, {
+    path: '/proposal/:id',
+    name: 'proposaldet',
+    component: () => import( /* webpackChunkName: "about" */ '../views/private/ProposalDetView.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/proposal/new',
@@ -135,14 +142,7 @@ const routes = [
       requiresAuth: true
     }
   },
-  {
-    path: '/proposal/det/:id',
-    name: 'proposarldet',
-    component: () => import(/* webpackChunkName: "about" */ '../views/private/ProposalDetView.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
+  
   {
     path: '/main',
     name: 'main',

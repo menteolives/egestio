@@ -9,6 +9,8 @@ export default new Vuex.Store({
   state: {
     tasks: [],
     task: [],
+    proposals: [],
+    proposal: [],
     projects: JSON.parse(localStorage.getItem('projects')),
     users: JSON.parse(localStorage.getItem('users')),
     task_comments: [],
@@ -34,6 +36,12 @@ export default new Vuex.Store({
     },
     SET_TASKS(state, tasks) {
       state.tasks = tasks
+    },
+    SET_PROPOSALS(state, proposals) {
+      state.proposals = proposals
+    },
+    SET_PROPOSAL(state, proposal) {
+      state.proposal = proposal
     },
     SET_TASK(state, task) {
       state.task = task
@@ -104,6 +112,41 @@ export default new Vuex.Store({
         .then((result) => {
           commit('SET_TASKS', result.data.tasks);
           console.log(result.data.tasks);
+
+        })
+    },
+    async loadProposals({commit}) {
+      var user_token = localStorage.getItem('token');
+      const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "proposals";
+      var AxiosOptions = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `${user_token}`
+        }
+      }
+      axios
+        .get(ENDPOINT_PATH, AxiosOptions)
+        .then((result) => {
+          commit('SET_PROPOSALS', result.data.proposals);
+          console.log(result.data.proposals);
+
+        })
+    },
+    async loadProposal({commit}, proposal_id) {
+      console.log("proposal_id", proposal_id);
+      var user_token = localStorage.getItem('token');
+      const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "proposal/" + proposal_id;
+      var AxiosOptions = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `${user_token}`
+        }
+      }
+      axios
+        .get(ENDPOINT_PATH, AxiosOptions)
+        .then((result) => {
+          commit('SET_PROPOSAL', result.data.proposal);
+          console.log(result.data.proposal);
 
         })
     },

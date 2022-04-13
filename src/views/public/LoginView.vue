@@ -1,7 +1,11 @@
 <template>
   <div class="login">
-    <div class="container">
+    <div class="container p-1">
       <h1>Acceso</h1>
+      <div class="card">
+        <div class="card-body">
+
+        
       <form>
         <p class="h4 text-center mb-4">Entrar</p>
         <label for="defaultFormLoginEmailEx" class="grey-text">Usuario</label>
@@ -29,6 +33,8 @@
           >
         </div>
       </form>
+      </div>
+      </div>
     </div>
   </div>
 </template>
