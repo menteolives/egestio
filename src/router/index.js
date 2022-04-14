@@ -127,7 +127,7 @@ const routes = [
       requiresAuth: true
     }
   }, {
-    path: '/proposal/:id',
+    path: '/proposal/det/:id',
     name: 'proposaldet',
     component: () => import( /* webpackChunkName: "about" */ '../views/private/ProposalDetView.vue'),
     meta: {

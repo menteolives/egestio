@@ -213,6 +213,7 @@ export default new Vuex.Store({
           console.log("RESPUESTA API, el usuario puede seguir según su token", user_token);
           console.log(result);
           //guarde en local storage el token para recordar próximas entradas
+          
           //localStorage.setItem('token',result.data.token);
           //this.$router.push('day');
           

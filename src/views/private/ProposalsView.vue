@@ -39,45 +39,36 @@
       </div>
       <div class="list-group">
         <router-link
-          :to="'/proposal/' + proposal.id"
+          :to="'/proposal/det/' + proposal.id"
           v-for="proposal in proposals"
           v-bind:key="proposal.id"
           class="list-group-item list-group-item-action p-1"
         >
           {{ proposal.title }}
           <div>
-            <div class="progress" style="height: 10px">
-              <div
-                class="progress-bar progress-bar-striped bg-success"
-                role="progressbar"
-                style="width: 60%"
-                aria-valuenow="30"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-              <div
-                class="progress-bar progress-bar-striped bg-danger"
-                role="progressbar"
-                style="width: 20%"
-                aria-valuenow="20"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-              <div
-                class="progress-bar progress-bar-striped bg-secondary"
-                role="progressbar"
-                style="width: 20%"
-                aria-valuenow="20"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
+            <b-progress class="mt-2" style="height:10px;" :max="proposal.votes_max" striped>
+              <b-progress-bar :value="proposal.votes_Y" variant="success"></b-progress-bar>
+              <b-progress-bar :value="proposal.votes_N" variant="danger"></b-progress-bar>
+              <b-progress-bar :value="proposal.votes_A" variant="secondary"></b-progress-bar>
+            </b-progress>
+
             <div class="d-flex justify-content-between">
-              <small>Votado 100% (7 votos)</small>
+              <small>Votado {{percentage(proposal.votes_total,proposal.votes_max)}} % ({{proposal.votes_total}} votos)</small>
               <div>
-                <small class="text-success mr-2"><b>Si</b> 60%</small>
-                <small class="text-danger mr-2"><b>No</b> 20%</small>
-                <small class="text-secondary"><b>Abs</b> 20%</small>
+                <small class="text-success mr-2" ><b>Si</b> 
+                  {{ percentage(proposal.votes_Y,proposal.votes_max) }}%
+                  ({{proposal.votes_Y}})
+                  </small>
+                <small class="text-danger mr-2"><b>No</b>
+                  {{ percentage(proposal.votes_N,proposal.votes_max) }}%
+                  ({{proposal.votes_N}})
+                </small>
+                <small class="text-secondary"><b>Abs</b> 
+                  {{ percentage(proposal.votes_A,proposal.votes_max) }}%
+                  ({{proposal.votes_A}})
+                </small>
+
+                
               </div>
             </div>
           </div>
@@ -106,6 +97,12 @@ export default {
 
       return proposals;
     },
+  },
+  methods: {
+    percentage( value,maxValue) {
+      var num =Math.round((100 * value) / maxValue);
+  return parseInt(num) || 0;
+},
   },
   created() {
     this.$store.dispatch("loadProposals");
