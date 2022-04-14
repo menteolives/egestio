@@ -175,11 +175,13 @@ router.beforeEach((to, from, next) => {
     if(localStorage.getItem('token')) {
       //tiene acceso console.log("tiene acceso");
       console.log("Existe sesión, puede continuar", localStorage.getItem('token'));
+      store.state.user_token = localStorage.getItem('token');
+      store.state.session = JSON.parse(localStorage.getItem('session'));
       next();
     } else {
       console.log("Datos de sesión inexistentes, intenta reactivar via token");
       if(localStorage.getItem('token')) {
-        store.state.user_token = localStorage.getItem('token');
+        
         store.dispatch("checkToken");
       } else {
         console.log("no tiene acceso");

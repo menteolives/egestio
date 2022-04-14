@@ -14,7 +14,7 @@ export default new Vuex.Store({
     projects: JSON.parse(localStorage.getItem('projects')),
     users: JSON.parse(localStorage.getItem('users')),
     task_comments: [],
-    session: JSON.parse(localStorage.getItem('session'))
+    session: null
   },
   mutations: {
     /*SET_USERS(state, users) {
@@ -54,7 +54,6 @@ export default new Vuex.Store({
     }*/
   },
   actions: {
-
     async loadUsers() {
       var user_token = localStorage.getItem('token');
       const ENDPOINT_PATH = process.env.VUE_APP_RUTA_API + "users";

@@ -10,12 +10,12 @@
         <h5 class='card-title'>Nueva propuesta</h5>
     <div class="mb-3">
   <label class="form-label">Título</label>
-  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la propuesta" v-model="title">
+  <input type="text" class="form-control" name="title" maxlength="150" placeholder="Título de la propuesta" v-model="proposal.title">
 </div>
 <div class="mb-3">
   <label class="form-label">Descripción</label>
    <vue-editor
-          v-model="text"
+          v-model="proposal.text"
           :editor-toolbar="editorToolbar"
         ></vue-editor>
   
@@ -30,7 +30,7 @@
             type="date"
             class="form-control"
             name="due_date"
-            v-model="end_date"
+            v-model="proposal.end_date"
           />
         </div>
       </div>
@@ -52,10 +52,12 @@ export default {
   data() {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
+      proposal: {
+        title: "",
+        text: "",
+        end_date: ""
+      },
       
-      end_date: "",
-      title: "",
-      text: "",
        editorToolbar: [
         ["bold", "italic", "underline","link"],
         
@@ -85,9 +87,9 @@ export default {
      console.log(ENDPOINT_PATH);
       const params = new URLSearchParams();
       
-      params.append('title', this.title);
-      params.append('text', this.text);
-      params.append('end_date', this.end_date);
+      params.append('title', this.proposal.title);
+      params.append('text', this.proposal.text);
+      params.append('end_date', this.proposal.end_date);
       axios.post(ENDPOINT_PATH , params, optionAxios).then((result) => {
         console.log(result);
       })

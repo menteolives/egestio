@@ -64,6 +64,7 @@ export default {
       return this.$store.state.users;
     },
     session: function() {
+      
       return this.$store.state.session;
     },
     tasks_sorted: function(orderby="due_date") {
@@ -87,6 +88,7 @@ export default {
     },
   },
   created() {
+    console.log(this.$store.state.session.user_name);
     this.$store.dispatch("loadUsers");
     this.$store.dispatch("loadTasks");
   },
