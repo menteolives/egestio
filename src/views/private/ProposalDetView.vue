@@ -2,7 +2,7 @@
 <template>
   <div class="proposalnew">
     
-    <b-modal id="modal-vote" ok-only ok-title="Cancelar" title="Votar propuesta">
+    <b-modal  v-if="proposal.already_voted === '0'" id="modal-vote" ok-only ok-title="Cancelar" title="Votar propuesta">
     <h5>{{proposal.title}}</h5>
     
       
@@ -17,8 +17,11 @@
       <h4>Detalles de propuesta</h4>
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{proposal.title}}</h5>
-          <b-button variant="btn btn-primary" v-b-modal.modal-vote>Votar</b-button>
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">{{proposal.title}}</h5>
+          <b-button v-if="proposal.already_voted === '0'" variant="btn btn-primary" v-b-modal.modal-vote>Votar</b-button>
+        </div>
+          
           <div v-html="proposal.text"></div>
           <div>
             <b-progress class="mt-2" :max="proposal.votes_max" striped>
@@ -103,6 +106,9 @@ percentage( value,maxValue) {
         console.log(result);
         this.proposal["votes_"+vote_value] = parseInt(this.proposal["votes_"+vote_value])+1;
         this.proposal.votes_total = parseInt(this.proposal.votes_total)+1;
+        //this.$refs['modal-vote'].hide();
+        this.proposal.already_voted = "1";
+
         //this.task.status = 9;
         //this.$store.state.tasks[this.task.id].status = 9;
       });

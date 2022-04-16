@@ -40,8 +40,8 @@ export default {
   },
   computed: {
     projects: function() {
-      console.log(this.$store.state.projects)
-          return this.$store.state.projects
+      console.log("proyectos",localStorage.getItem('projects'))
+          return JSON.parse(localStorage.getItem('projects'))
       },
   },
   created() {

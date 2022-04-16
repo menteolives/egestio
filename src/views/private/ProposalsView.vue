@@ -1,9 +1,11 @@
 <template>
   <div class="proposals">
     <navbar />
+    
     <div class="container p-1">
+      
       <div class="d-flex justify-content-between">
-        <div>pedent</div>
+        <div></div>
         <div>
           <router-link to="/proposal/new" tag="button" class="btn"
             ><font-awesome-icon icon="plus" class="text-success"
@@ -11,32 +13,7 @@
         </div>
       </div>
 
-      <div>
-        <div>
-          <b-tabs>
-            <b-tab active>
-              <template #title>
-                <i class="fa-solid fa-question"></i> Votar
-              </template>
-              <p class="p-3">Tab contents 1</p>
-            </b-tab>
-
-            <b-tab>
-              <template #title>
-                <i class="fa-solid fa-check text-success"></i> Aprobado
-              </template>
-              <p class="p-3">Tab contents 2</p>
-            </b-tab>
-
-            <b-tab>
-              <template #title>
-                <i class="fa-solid fa-xmark text-danger"></i> Rechazado
-              </template>
-              <p class="p-3">Tab contents 3</p>
-            </b-tab>
-          </b-tabs>
-        </div>
-      </div>
+      
       <div class="list-group">
         <router-link
           :to="'/proposal/det/' + proposal.id"

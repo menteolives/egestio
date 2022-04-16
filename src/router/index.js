@@ -48,10 +48,15 @@ const routes = [
           //console.log(result)
           if(result.data.status == "success" )
           {
-              store.state.session = result.data.data;
+              
               localStorage.setItem('token',token);
+               localStorage.setItem("token", result.data.user.token);
+               localStorage.setItem("session", JSON.stringify(result.data.user));
+               store.state.session = result.data.user;
+               store.dispatch("loadProjects");
+               
               //console.log(store.state.session);
-              next("main");
+              next("tasks");
           }
           else {
               //console.log("ir a login");
@@ -138,15 +143,6 @@ const routes = [
     path: '/proposal/new',
     name: 'proposarldet',
     component: () => import(/* webpackChunkName: "about" */ '../views/private/ProposalNewView.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
-  
-  {
-    path: '/main',
-    name: 'main',
-    component: () => import(/* webpackChunkName: "about" */ '../views/private/MainView.vue'),
     meta: {
       requiresAuth: true
     }

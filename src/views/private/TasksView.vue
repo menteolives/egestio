@@ -4,6 +4,7 @@
     <div class="container p-1">
       <div class="d-flex justify-content-between">
         <div>
+          {{session.user_name}}
           <router-link :to="'/tasks/'+session.user_name">Mis tareas</router-link>
           </div>
           <div>
