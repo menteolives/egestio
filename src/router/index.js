@@ -93,7 +93,15 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  },
+  }, {
+    path: '/tasks_history',
+    name: 'tasks',
+    component: () => import( /* webpackChunkName: "about" */ '../views/private/TasksHistory.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  }
+  ,
   {
     path: '/tasks/:user?',
     name: 'tasks',

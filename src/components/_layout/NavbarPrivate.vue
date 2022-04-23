@@ -15,6 +15,7 @@
       <router-link to="/proposals"><font-awesome-icon :icon="['far', 'hand-point-up']" /> Propuestas</router-link> ·  
       <router-link to="/projects">Proyectos</router-link> ·
       <router-link to="/tasks">Tareas</router-link> ·
+      <router-link to="/tasks_history">Historial</router-link> ·
       <router-link to="/logout">Salir</router-link>  
     </nav>
     
