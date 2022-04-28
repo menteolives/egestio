@@ -15,6 +15,11 @@ import axios from "axios";
 
 export default {
   name: "TaskDetView",
+  metaInfo() {
+    return {
+      title: this.task.title,
+    }
+  },
   data() {
     return {
      task: [],

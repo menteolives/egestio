@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/store'
+import VueMeta from 'vue-meta';
 import {
   BootstrapVue
 } from 'bootstrap-vue'
@@ -44,6 +45,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 //import '@fortawesome/fontawesome-free/css/all.css'
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue)
+Vue.use(VueMeta);
 Vue.config.productionTip = false
 
 new Vue({

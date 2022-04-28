@@ -138,6 +138,11 @@ import axios from "axios";
 
 export default {
   name: "TaskDetView",
+  metaInfo() {
+    return {
+      title: this.task.title,
+    }
+  },
   data() {
     return {
       apiServer: process.env.VUE_APP_RUTA_API,
@@ -165,6 +170,7 @@ export default {
   created() {
     this.$store.dispatch("loadTask", this.$route.params.id);
     this.$store.dispatch("loadTaskComments", this.$route.params.id);
+    
   },
   mounted() {},
   methods: {
